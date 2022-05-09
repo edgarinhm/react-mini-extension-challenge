@@ -1,0 +1,10 @@
+.home_wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.action_buttons {
+    margin-left: 1rem;
+}

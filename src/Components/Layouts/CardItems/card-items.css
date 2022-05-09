@@ -1,0 +1,10 @@
+.card_items_wrap {
+    border: solid .3rem lightgray;
+    border-radius: .5rem;
+    width: 15rem;
+    padding: 1rem;
+}
+
+label {
+    font-weight: bold;
+}

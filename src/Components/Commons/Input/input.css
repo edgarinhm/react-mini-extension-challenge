@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    padding-bottom: 1rem;
+}
+
+.label {
+    padding-bottom: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.input {
+    width: max-content;
+}
+
+.error {
+    color: red;
+    padding-top: 0.5rem;
+}
