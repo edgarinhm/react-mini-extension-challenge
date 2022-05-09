@@ -3,21 +3,14 @@ import Input from "../../Components/Commons/Input";
 import useLogin from "./useLogin";
 import "./login.css";
 
-interface FormData {
-  name: string;
-}
-
 const Login = () => {
-  const initState = {
-    name: "",
-  };
-  const { handleLogin, handleChange, form } = useLogin<FormData>(initState);
+  const { handleLogin, handleChange } = useLogin();
   return (
     <section className="login_wrap">
-      <form>
+      <form onSubmit={handleLogin}>
         <Input name="name" label="Student Name" onChange={handleChange} />
         <div className="actions">
-          <Button onClick={() => handleLogin(form.name)} label="Submit" />
+          <Button type="submit" label="Submit" />
         </div>
       </form>
     </section>

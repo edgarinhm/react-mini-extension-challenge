@@ -1,11 +1,11 @@
-import Header from "../../Components/Layouts/Header";
-import CardItems from "../../Components/Layouts/CardItems/CardItems";
-import "./home.css";
-import useHome from "./useHome";
 import Button from "../../Components/Commons/Button";
+import ListCourses from "../../Components/Layouts/ListCourses/ListCourses";
+import Header from "../../Components/Layouts/Header";
+import useHome from "./useHome";
+import "./home.css";
 
 const Home = () => {
-  const { studenName, handleLogout } = useHome();
+  const { handleLogout } = useHome();
   return (
     <article className="home_wrap">
       <Header title="Mini Extension Challenge">
@@ -13,7 +13,7 @@ const Home = () => {
           <Button label="Logout" onClick={handleLogout} />
         </div>
       </Header>
-      <CardItems course={""} students={studenName} />
+      <ListCourses />
     </article>
   );
 };

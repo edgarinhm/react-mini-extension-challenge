@@ -1,4 +1,4 @@
-import { createAsyncThunk, createAction } from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { Courses } from "../../Interfaces/courses-interface";
 import { Students } from "../../Interfaces/students-interface";
 import { User } from "../../Interfaces/user-interface";
@@ -22,13 +22,4 @@ export const login = createAsyncThunk("user/login", async (user: User) => {
   }
 });
 
-export const logout = createAsyncThunk("user/logout", async () => {
-  try {
-    console.log("logout-action");
-    return StudentService.logout();
-  } catch ({ response: { data } }) {
-    throw data;
-  }
-});
-
-export const updateSession = createAction<object | undefined>("session/update");
+export const logout = createAction<boolean | undefined>("user/logout");

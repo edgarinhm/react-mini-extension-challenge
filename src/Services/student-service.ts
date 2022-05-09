@@ -17,11 +17,13 @@ class StudentService {
     }
   }
 
-  static logout = (): Promise<boolean> => {
-    localStorage.clear();
-    console.log("logout");
-    return Promise.resolve(true);
-  };
+  static async logout(): Promise<boolean> {
+    try {
+      return await Promise.resolve(false);
+    } catch (error) {
+      throw Error(error as string);
+    }
+  }
 }
 
 export default StudentService;

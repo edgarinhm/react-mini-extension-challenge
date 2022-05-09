@@ -24,15 +24,15 @@ const handleLoginFulfilled = (
   state.classes = { ...payload.classes };
 };
 
-const handleLogoutFulfilled = () => {
+const handleLogout = (state: SessionState) => {
   localStorage.clear();
-  console.log("handleLogoutFulfilled");
-
-  return initialState;
+  state.authenticated = initialState.authenticated;
+  state.student = { ...initialState.student };
+  state.classes = { ...initialState.classes };
 };
 
 export default createReducer(initialState, {
   [login.fulfilled.type]: handleLoginFulfilled,
-  [login.rejected.type]: handleLogoutFulfilled,
-  [logout.fulfilled.type]: handleLogoutFulfilled,
+  [login.rejected.type]: handleLogout,
+  [logout.type]: handleLogout,
 });
