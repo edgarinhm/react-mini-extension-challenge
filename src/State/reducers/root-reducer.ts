@@ -4,6 +4,7 @@ import { persistReducer } from "redux-persist";
 import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 
 import session, { SessionState } from "./features/session-reducer";
+import form from "./features/form-reducer";
 
 const sessionPersistConfig = {
   key: "session",
@@ -14,6 +15,7 @@ const sessionPersistConfig = {
 
 const rootReducer = combineReducers({
   session: persistReducer<SessionState>(sessionPersistConfig, session),
+  form: form,
 });
 
 export default rootReducer;

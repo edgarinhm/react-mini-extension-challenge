@@ -32,7 +32,17 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.form_loader {
+  margin: 1rem;
+}
+
+.form_status {
+  color: red;
+  margin: 1rem;
 }

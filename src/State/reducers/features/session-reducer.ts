@@ -33,6 +33,5 @@ const handleLogout = (state: SessionState) => {
 
 export default createReducer(initialState, {
   [login.fulfilled.type]: handleLoginFulfilled,
-  [login.rejected.type]: handleLogout,
   [logout.type]: handleLogout,
 });

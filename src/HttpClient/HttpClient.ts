@@ -1,19 +1,39 @@
-import ClientInterceptor from "../Interceptor/client-interceptor";
+import { POST } from "../Constants/api-constant";
+import httpClientInterceptor from "../Interceptor/http-client-interceptor";
+import { store } from "../State/store";
 
-const { baseUrl, headers } = ClientInterceptor();
+const { baseUrl, headers, interteptors } = httpClientInterceptor();
 
 const HttpClient = () => {
   const get = async (url: string) => {
-    const response = await fetch(baseUrl + url, { headers });
-    return response.json();
+    interteptors.request(store);
+    return fetch(baseUrl + url, { headers })
+      .then(handleResponse)
+      .finally(() => {
+        interteptors.response(store);
+      });
   };
   const post = async (url: string, body: Object) => {
-    const response = await fetch(baseUrl + url, {
-      method: "POST",
+    interteptors.request(store);
+    return fetch(baseUrl + url, {
+      method: POST,
       headers,
       body: JSON.stringify(body),
+    })
+      .then(handleResponse)
+      .finally(() => {
+        interteptors.response(store);
+      });
+  };
+  const handleResponse = (response: Response) => {
+    return response.text().then((text) => {
+      const data = text && JSON.parse(text);
+      if (!response.ok) {
+        const error = (data && data.message) || response.statusText;
+        return Promise.reject(error);
+      }
+      return data;
     });
-    return response.json();
   };
 
   return { get, post };
