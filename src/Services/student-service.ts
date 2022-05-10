@@ -24,6 +24,18 @@ class StudentService {
       throw Error(error as string);
     }
   }
+
+  static async listStudents(): Promise<Students> {
+    try {
+      const data: Students = await get(
+        `${STUDENT_URL}?view=Grid view&filterByFormula=NOT({Name})=''`
+      );
+
+      return data;
+    } catch (error) {
+      throw Error(error as string);
+    }
+  }
 }
 
 export default StudentService;

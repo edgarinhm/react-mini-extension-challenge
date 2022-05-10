@@ -6,13 +6,13 @@ import { login, logout } from "../../actions/user-actions";
 export interface SessionState {
   authenticated: boolean;
   student: Students;
-  classes: Courses[];
+  courses: Courses;
 }
 
 const initialState: SessionState = {
   authenticated: false,
   student: { records: [] },
-  classes: [],
+  courses: { records: [] },
 };
 
 const handleLoginFulfilled = (
@@ -21,14 +21,14 @@ const handleLoginFulfilled = (
 ) => {
   state.authenticated = payload.authenticated;
   state.student = { ...payload.student };
-  state.classes = { ...payload.classes };
+  state.courses = { ...payload.courses };
 };
 
 const handleLogout = (state: SessionState) => {
   localStorage.clear();
   state.authenticated = initialState.authenticated;
   state.student = { ...initialState.student };
-  state.classes = { ...initialState.classes };
+  state.courses = { ...initialState.courses };
 };
 
 export default createReducer(initialState, {

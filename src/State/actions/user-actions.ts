@@ -14,6 +14,18 @@ export const login = createAsyncThunk("user/login", async (user: User) => {
       courses = await CourseService.listClases(
         student.records[0].fields.Classes
       );
+      const studentsCollection = await StudentService.listStudents();
+      courses.records = courses.records.map((course) => {
+        const filterStudents = studentsCollection.records.filter((students) => {
+          return course.fields.Students.join("|").includes(students.id);
+        });
+        const studentNames = filterStudents.map((filter) => {
+          return filter.fields.Name;
+        });
+        course.fields.Students = studentNames;
+        return course;
+      });
+
       authenticated = true;
     }
     return { authenticated, student, courses };

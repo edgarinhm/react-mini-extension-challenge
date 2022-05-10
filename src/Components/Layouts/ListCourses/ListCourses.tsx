@@ -2,12 +2,16 @@ import CardItems from "../CardItems";
 import useListCourses from "./useListCourses";
 
 const ListCourses = () => {
-  const { studentName, courses } = useListCourses();
+  const { studentCourses, filterStudentsInCourse } = useListCourses();
   return (
     <div>
-      {courses.map((course) => {
+      {studentCourses.map((course) => {
         return (
-          <CardItems key={course} course={course} students={studentName} />
+          <CardItems
+            key={course.id}
+            course={course.fields.Name}
+            students={filterStudentsInCourse(course.id)}
+          />
         );
       })}
     </div>
