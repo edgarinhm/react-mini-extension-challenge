@@ -5,28 +5,27 @@ import { useNavigate } from "react-router-dom";
 import { login } from "../../State/actions/user-actions";
 import routesPathsContant from "../../Constants/routes-paths-constant";
 import useForm from "../../Hooks/useForm";
+import loginValidation from "../../Validations/login-validation";
 
 const useLogin = () => {
   interface FormData {
     name: string;
   }
-  const initState = {
+  const initState: FormData = {
     name: "",
   };
 
-  const { form, handleChange } = useForm<FormData>(initState);
-
+  const { form, handleChange, disabled, error } = useForm(
+    initState,
+    loginValidation
+  );
   const dispatch = useAppDispatch();
   const { authenticated } = useAppSelector((state) => state.session);
   const navigate = useNavigate();
 
   const handleLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (form.name.trim() !== "") {
-      dispatch(login(form));
-    } else {
-      console.log("ERROR VALIDATION", form.name);
-    }
+    dispatch(login(form));
   };
 
   useEffect(() => {
@@ -35,7 +34,7 @@ const useLogin = () => {
     }
   }, [authenticated, navigate]);
 
-  return { handleLogin, handleChange, form };
+  return { handleLogin, handleChange, form, disabled, error };
 };
 
 export default useLogin;
